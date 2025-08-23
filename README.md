@@ -3,7 +3,7 @@
    <br>2.FEATURES
    <br>&nbsp;&nbsp;&nbsp;&nbsp;:This Tool Helps To Find Faster Open Ports.<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Also Allow This Tool To Name The Open Port.
    <br>3.INSTALLATION/SETUP
-   <br>&nbsp;&nbsp;&nbsp;&nbsp;git clone https://github.com/saiprasad-belvat/Pytho-Tools<br>&nbsp;&nbsp;&nbsp;&nbsp;cd Python-Tools
+   <br>&nbsp;&nbsp;&nbsp;&nbsp;git clone https://github.com/saiprasad-belvat/Python-Tools<br>&nbsp;&nbsp;&nbsp;&nbsp;cd Python-Tools
  <br>4.RUN THE TOOL
    <br>&nbsp;&nbsp;&nbsp;&nbsp;python simpleportscanner.py
    <br>5.EXAMLPLE
