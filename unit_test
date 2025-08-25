@@ -1,0 +1,41 @@
+import unittest
+from unittest.mock import patch, MagicMock
+import port_scanner
+
+
+class TestPortScanner(unittest.TestCase):
+
+    @patch("socket.socket")  # Mock socket so no real network call happens
+    def test_scan_open_port(self, mock_socket):
+        # Setup mock: connect_ex returns 0 (port open)
+        mock_sock_instance = MagicMock()
+        mock_sock_instance.connect_ex.return_value = 0
+        mock_socket.return_value = mock_sock_instance
+
+        # Capture print output
+        with patch("builtins.print") as mock_print:
+            port_scanner.scan_ports("127.0.0.1", [80])
+
+            mock_print.assert_any_call("[+] Port 80 (HTTP) is OPEN")
+
+    @patch("socket.socket")
+    def test_scan_closed_port(self, mock_socket):
+        # Setup mock: connect_ex returns 1 (port closed/filtered)
+        mock_sock_instance = MagicMock()
+        mock_sock_instance.connect_ex.return_value = 1
+        mock_socket.return_value = mock_sock_instance
+
+        with patch("builtins.print") as mock_print:
+            port_scanner.scan_ports("127.0.0.1", [22])
+
+            mock_print.assert_any_call("[-] Port 22 (SSH) is CLOSED or FILTERED")
+
+    def test_common_ports_dictionary(self):
+        """Check if known ports are mapped correctly"""
+        self.assertEqual(port_scanner.common_ports[80], "HTTP")
+        self.assertEqual(port_scanner.common_ports[443], "HTTPS")
+        self.assertEqual(port_scanner.common_ports.get(9999, "Unknown Service"), "Unknown Service")
+
+
+if __name__ == "__main__":
+    unittest.main()
